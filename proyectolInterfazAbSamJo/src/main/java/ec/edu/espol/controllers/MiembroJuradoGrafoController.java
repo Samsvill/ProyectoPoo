@@ -15,10 +15,19 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -39,12 +48,23 @@ public class MiembroJuradoGrafoController implements Initializable {
     private TextField emailMbJurado;
     @FXML
     private TextField descpMbJurado;
+    @FXML
+    private BorderPane bpane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+            Image img = new Image("Imagenes\\mascotas.jpg");
+            BackgroundImage bImg = new BackgroundImage(img,
+                                                       BackgroundRepeat.REPEAT,
+                                                       BackgroundRepeat.REPEAT,
+                                                       BackgroundPosition.CENTER,
+                                                       BackgroundSize.DEFAULT);
+
+            Background bGround = new Background(bImg);
+            bpane.setBackground(bGround);
         //try {
             //        Stage stg = (Stage)nameMbJurado.getScene().getWindow();
 //        stg.show();
@@ -65,10 +85,10 @@ public class MiembroJuradoGrafoController implements Initializable {
     @FXML
     private void regresarMenu(MouseEvent event) {
         try {
-//            FXMLLoader loader = new FXMLLoader(App.class.getResource("menugrafo"));
-//            App.scene.setRoot(loader.load());
-            //FXMLLoader loader = App.loadFXML("dueñografo");
-            App.setRoot("menugrafo");
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Menu.fxml"));
+            Parent root;
+            root = fxmlLoader.load();
+            App.scene.setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

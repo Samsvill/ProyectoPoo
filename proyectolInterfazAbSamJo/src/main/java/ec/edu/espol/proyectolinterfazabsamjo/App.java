@@ -17,9 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("evaluaciongrafo.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Menu.fxml"));
         Parent root = fxmlLoader.load();
-        scene = new Scene(root, 700, 700);
+        scene = new Scene(root, 600, 430);
         stage.setScene(scene);
         stage.show();
 //        scene = new Scene(loadFXML("miembrojuradografo").load(), 640, 480);
@@ -27,14 +27,6 @@ public class App extends Application {
 //        stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml).load());
-    }
-
-    public static FXMLLoader loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader;
-    }
 
     public static void main(String[] args) {
         launch();

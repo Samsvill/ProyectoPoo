@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.MenuController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menú de Opciones">
+            <items>
+                  <MenuItem fx:id="dueno" mnemonicParsing="false" onAction="#llamarDueno" text="Dueño" />
+                  <MenuItem fx:id="mascot" mnemonicParsing="false" onAction="#llamarMascot" text="Mascota" />
+                  <MenuItem fx:id="concurso" mnemonicParsing="false" onAction="#llamarConcur" text="Concurso" />
+                  <MenuItem fx:id="premio" mnemonicParsing="false" onAction="#llamrpremio" text="Premio" />
+                  <MenuItem fx:id="Criterio" mnemonicParsing="false" onAction="#llamrCriterio" text="Criterio" />
+                  <MenuItem fx:id="inscrip" mnemonicParsing="false" onAction="#llamrInscrip" text="Inscripción" />
+                  <MenuItem fx:id="miembro" mnemonicParsing="false" onAction="#llamarmien" text="Miembro Jurado" />
+                  <MenuItem fx:id="evaluacion" mnemonicParsing="false" onAction="#llamareva" text="Evaluación" />
+              <MenuItem fx:id="close" mnemonicParsing="false" onAction="#salir" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="panel" layoutY="25.0" prefHeight="375.0" prefWidth="600.0" />
+   </children>
+</AnchorPane>
