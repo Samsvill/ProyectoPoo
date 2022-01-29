@@ -25,11 +25,19 @@ public abstract class Persona {
     //Constructores
     
 
-    public Persona(int id, String nombre, String apellidos, String telefono, String email) {
+    public Persona(int id, String nombre, String apellidos, String telefono, String email) throws DatoNoCompletadoException{
         this.id = id;
+        if(nombre == null || Objects.equals(nombre, ""))
+            throw new DatoNoCompletadoException("No ingresó el nombre");
         this.nombre = nombre;
+        if(apellidos == null || Objects.equals(apellidos, ""))
+            throw new DatoNoCompletadoException("No ingresó el/los apellido/s");
         this.apellidos = apellidos;
+        if(telefono == null || Objects.equals(telefono, ""))
+            throw new DatoNoCompletadoException("No ingresó el telefono");
         this.telefono = telefono;
+        if(email == null || Objects.equals(email, ""))
+            throw new DatoNoCompletadoException("No ingresó el email");
         this.email = email;
     }
     

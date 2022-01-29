@@ -31,28 +31,40 @@ public class Evaluacion {
     private int idCriterio;
     private Criterio criterio;
 
-    public Evaluacion(int idEvalucion, int idMiembroJurado, int idInscripcion, double calificacion, MiembroJurado miembroJurado, Inscripcion inscripcion, int idCriterio, Criterio criterio) {
+    public Evaluacion(int idEvalucion, int idMiembroJurado, int idInscripcion, double calificacion, MiembroJurado miembroJurado, Inscripcion inscripcion, int idCriterio, Criterio criterio) throws DatoNoCompletadoException{
         this.idEvalucion = Util.nextID("evaluaciones.txt");
         this.idMiembroJurado = idMiembroJurado;
-        this.idInscripcion = Util.nextID("inscripciones.txt");
-        if(calificacion>=0)
-            this.calificacion = calificacion;
-        else
-            this.calificacion = -calificacion;
+        if(idInscripcion <= 0)
+            throw new DatoNoCompletadoException("El ID de inscripción no ha sido ingresado");
+        this.idInscripcion = idInscripcion;
+        if(calificacion < 0)
+            throw new DatoNoCompletadoException("Su calificación no existe");
+        this.calificacion = calificacion;
+        if(miembroJurado == null)
+            throw new DatoNoCompletadoException("Su meimbro del Jurado no existe");
         this.miembroJurado = miembroJurado;
+        if(inscripcion == null)
+            throw new DatoNoCompletadoException("Su inscripción no existe");
         this.inscripcion = inscripcion;
+        if(idCriterio <= 0)
+            throw new DatoNoCompletadoException("El ID del criterio no ha sido ingresado");
         this.idCriterio = idCriterio;
+        if(criterio == null)
+            throw new DatoNoCompletadoException("Su criterio no existe");
         this.criterio = criterio;
     }
 
-    public Evaluacion(int idEvalucion, int idMiembroJurado, int idInscripcion, double calificacion, int idCriterio) {
+    public Evaluacion(int idEvalucion, int idMiembroJurado, int idInscripcion, double calificacion, int idCriterio) throws DatoNoCompletadoException{
         this.idEvalucion = Util.nextID("evaluaciones.txt");
         this.idMiembroJurado = idMiembroJurado;
+        if(idInscripcion <= 0)
+            throw new DatoNoCompletadoException("El ID de inscripción no ha sido ingresado");
         this.idInscripcion = idInscripcion;
-        if(calificacion>=0)
-            this.calificacion = calificacion;
-        else
-            this.calificacion = -calificacion;
+        if(calificacion < 0)
+            throw new DatoNoCompletadoException("Su calificación no existe");
+        this.calificacion = calificacion;
+        if(idCriterio <= 0)
+            throw new DatoNoCompletadoException("El ID del criterio no ha sido ingresado");
         this.idCriterio = idCriterio;
     }
 
@@ -174,13 +186,20 @@ public class Evaluacion {
         }     
         return evaluaciones;
     }    
-    public static Evaluacion nextEvaluacion(Scanner sc){        
-        int idmj = 0;
-        int idInsc = 0;
-        int idCrit = 0;
-        System.out.println("Ingrese la nota de evaluacion: ");
-        double cal = sc.nextDouble();
-        Evaluacion eva1= new Evaluacion(Util.nextID("evaluaciones.txt"),idmj, idInsc,cal,idCrit);
+    public static Evaluacion nextEvaluacion(Scanner sc){
+        Evaluacion eva1 = null;
+        do{
+            try{
+                int idmj = 0;
+                int idInsc = 0;
+                int idCrit = 0;
+                System.out.println("Ingrese la nota de evaluacion: ");
+                double cal = sc.nextDouble();
+                eva1= new Evaluacion(Util.nextID("evaluaciones.txt"),idmj, idInsc,cal,idCrit);
+            }catch(DatoNoCompletadoException dnce){
+                System.out.println(dnce.getMessage());
+            }
+        }while(eva1 == null);
         return eva1;
     }            
 }

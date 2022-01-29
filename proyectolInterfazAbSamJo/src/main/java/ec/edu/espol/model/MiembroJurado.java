@@ -30,8 +30,10 @@ public class MiembroJurado extends Persona{
     //Constructores
     
     public MiembroJurado(int id, String nombre, String apellidos, String telefono,
-            String email, String perfilProfesional) {
+            String email, String perfilProfesional) throws DatoNoCompletadoException{
         super(id, nombre, apellidos, telefono, email);
+        if(perfilProfesional == null || Objects.equals(perfilProfesional, ""))
+            throw new DatoNoCompletadoException("No ingresó el perfil profesional");
         this.descripcionPerfilProfesional = perfilProfesional;
         this.evaluaciones = new ArrayList<>();
     }
@@ -108,21 +110,29 @@ public class MiembroJurado extends Persona{
     }
     
     public static MiembroJurado nextMiembroJurado(Scanner sc){
+        MiembroJurado mj = null;
         sc.useDelimiter("\n");
-        int idm = Util.nextID("miembroJurados.txt");
-        System.out.println("Ingrese el nombre del Miembro del Jurado: ");
-        String nb0 = sc.next();
-        String nombre = nb0.toUpperCase().charAt(0) + nb0.substring(1, nb0.length()).toLowerCase();      
-        System.out.println("Ingrese los apellidos del Miembro del Jurado");
-        String ap = sc.next();
-        String apellido = ap.toUpperCase().charAt(0) + ap.substring(1, ap.length()).toLowerCase();
-        System.out.println("Ingrese el numero de telefono del Miembro de Jurado: ");
-        String tlf = sc.next();
-        System.out.println("Ingrese el email del Miembro del Jurado: ");
-        String mail = sc.next().toLowerCase();
-        System.out.println("Ingrese la descripcion profesional de su Miembro de Jurado: ");
-        String descrp = sc.next().toLowerCase();
-        MiembroJurado mj = new MiembroJurado(idm, nombre, apellido, tlf, mail, descrp);
+        do{
+            try{
+                int idm = Util.nextID("miembroJurados.txt");
+                System.out.println("Ingrese el nombre del Miembro del Jurado: ");
+                String nb0 = sc.next();
+                String nombre = nb0.toUpperCase().charAt(0) + nb0.substring(1, nb0.length()).toLowerCase();      
+                System.out.println("Ingrese los apellidos del Miembro del Jurado");
+                String ap = sc.next();
+                String apellido = ap.toUpperCase().charAt(0) + ap.substring(1, ap.length()).toLowerCase();
+                System.out.println("Ingrese el numero de telefono del Miembro de Jurado: ");
+                String tlf = sc.next();
+                System.out.println("Ingrese el email del Miembro del Jurado: ");
+                String mail = sc.next().toLowerCase();
+                System.out.println("Ingrese la descripcion profesional de su Miembro de Jurado: ");
+                String descrp = sc.next().toLowerCase();
+                mj = new MiembroJurado(idm, nombre, apellido, tlf, mail, descrp);
+            }catch(DatoNoCompletadoException dnce){
+                System.out.println(dnce.getMessage());
+            }
+        }
+        while(mj == null);
         return mj;
     }
         public static MiembroJurado obtenerMiembroJuradoXEmail(String email1){
