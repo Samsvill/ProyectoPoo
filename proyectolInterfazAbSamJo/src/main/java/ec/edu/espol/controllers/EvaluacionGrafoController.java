@@ -15,14 +15,17 @@ import ec.edu.espol.utilitario.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -30,6 +33,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -48,6 +53,10 @@ public class EvaluacionGrafoController implements Initializable {
     private TextField idCrit;
     @FXML
     private BorderPane bpane;
+    @FXML
+    private Pane visorImage;
+    @FXML
+    private Label verificador;
 
     /**
      * Initializes the controller class.
@@ -67,6 +76,7 @@ public class EvaluacionGrafoController implements Initializable {
         idInscr.setText("");
         calific.setText("");
         idCrit.setText("");
+        verificador.setText("pulse \"ENTER\" para mostrar la imagen de la mascota inscrita");
     }    
 
     @FXML
@@ -141,5 +151,32 @@ public class EvaluacionGrafoController implements Initializable {
         calific.setText("");
         idCrit.setText("");
     }
-    
+
+    @FXML
+    private void hayImagen(ActionEvent event) {
+        Inscripcion inscr = null;
+        try{
+            int idInscription = Integer.valueOf(idInscr.getText());
+            inscr = Inscripcion.ObtenerObjetoInscripcion(idInscription);
+            if(inscr == null){
+                verificador.setText("No hay Imagen");
+            }
+            int fotoID = inscr.getIdMascota();
+            Image img = new Image("Imagenes/"+fotoID, 140, 140, false, false);
+            ImageView imgV = new ImageView(img);
+            imgV.setFitHeight(147);
+            imgV.setFitWidth(147);
+            imgV.setX(0);
+            imgV.setY(0);
+            imgV.setLayoutX(0);
+            imgV.setLayoutY(25);
+            visorImage.getChildren().add(imgV);
+        }catch(NullPointerException nE){
+            System.out.println(nE.getMessage());
+        }catch(NumberFormatException nfE){
+            System.out.println(nfE.getMessage());
+        }
+        
+    }
+
 }

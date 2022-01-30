@@ -8,12 +8,13 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.EvaluacionGrafoController">
+<BorderPane fx:id="bpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.EvaluacionGrafoController">
    <top>
-      <Label maxHeight="97.0" maxWidth="100.0" minHeight="23.0" minWidth="56.0" prefHeight="23.0" prefWidth="100.0" text="Evaluación" BorderPane.alignment="CENTER">
+      <Label maxHeight="97.0" maxWidth="100.0" minHeight="23.0" minWidth="56.0" prefHeight="23.0" prefWidth="100.0" text="Evaluación" textFill="#f7f7f7" BorderPane.alignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -23,7 +24,7 @@
       </Label>
    </top>
    <left>
-      <GridPane maxHeight="280.0" maxWidth="130.0" minHeight="280.0" minWidth="130.0" prefHeight="280.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="280.0" maxWidth="130.0" minHeight="264.0" minWidth="130.0" prefHeight="264.0" prefWidth="130.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -35,18 +36,21 @@
             <Insets left="10.0" />
          </padding>
          <children>
-            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el email del miembro de Jurado:" textAlignment="CENTER" wrapText="true">
+            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el email del miembro de Jurado:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true">
                <font>
-                  <Font size="13.5" />
+                  <Font name="System Bold" size="13.5" />
                </font>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el id de la Inscripción de la Mascota:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el id de la Inscripción de la Mascota:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.rowIndex="1">
                <font>
-                  <Font size="13.5" />
+                  <Font name="System Bold" size="13.5" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="30.0" />
+               </GridPane.margin>
             </Label>
          </children>
       </GridPane>
@@ -61,17 +65,17 @@
             <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label maxHeight="93.0" maxWidth="131.0" minHeight="60.0" minWidth="119.0" prefHeight="76.0" prefWidth="131.0" text="Ingrese el id del Criterio para evaluar a la Mascota:" textAlignment="CENTER" wrapText="true">
+            <Label maxHeight="93.0" maxWidth="131.0" minHeight="60.0" minWidth="119.0" prefHeight="76.0" prefWidth="131.0" text="Ingrese el id del Criterio para evaluar a la Mascota:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true">
                <font>
-                  <Font size="13.5" />
+                  <Font name="System Bold" size="13.5" />
                </font>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <Label maxHeight="92.0" maxWidth="128.0" minHeight="60.0" minWidth="119.0" prefHeight="88.0" prefWidth="128.0" text=": Ingrese la calificación cuantitativa de la Evaluación" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+            <Label maxHeight="92.0" maxWidth="128.0" minHeight="60.0" minWidth="119.0" prefHeight="88.0" prefWidth="128.0" text=": Ingrese la calificación cuantitativa de la Evaluación" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.rowIndex="1">
                <font>
-                  <Font size="13.5" />
+                  <Font name="System Bold" size="13.5" />
                </font>
                <GridPane.margin>
                   <Insets top="15.0" />
@@ -83,23 +87,51 @@
    <center>
       <HBox maxHeight="289.0" maxWidth="340.0" minHeight="289.0" minWidth="340.0" prefHeight="289.0" prefWidth="340.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane maxHeight="284.0" maxWidth="136.0" minHeight="227.0" minWidth="136.0" prefHeight="227.0" prefWidth="136.0">
+            <GridPane maxHeight="284.0" maxWidth="136.0" minHeight="227.0" minWidth="101.0" prefHeight="284.0" prefWidth="101.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="emailJur" maxHeight="30.0" maxWidth="136.0" minHeight="30.0" minWidth="136.0" prefHeight="30.0" prefWidth="136.0">
+                  <TextField fx:id="emailJur" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin></TextField>
-                  <TextField fx:id="idInscr" maxHeight="30.0" maxWidth="136.0" minHeight="30.0" minWidth="136.0" prefHeight="30.0" prefWidth="136.0" GridPane.rowIndex="1" />
+                  <GridPane prefHeight="139.0" prefWidth="101.0" GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="verificador" maxHeight="70.0" maxWidth="100.0" minHeight="57.0" minWidth="100.0" prefHeight="70.0" prefWidth="100.0" textFill="#fffdfd" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="idInscr" maxHeight="30.0" maxWidth="100.0" minHeight="19.0" minWidth="100.0" onAction="#hayImagen" prefHeight="19.0" prefWidth="100.0" GridPane.valignment="BOTTOM" />
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
-            <GridPane maxHeight="291.0" maxWidth="136.0" minHeight="284.0" minWidth="136.0" prefHeight="284.0" prefWidth="136.0">
+            <Pane fx:id="visorImage" maxHeight="165.0" maxWidth="140.0" minHeight="165.0" minWidth="140.0" prefHeight="165.0" prefWidth="140.0">
+               <HBox.margin>
+                  <Insets top="65.0" />
+               </HBox.margin>
+               <children>
+                  <Label layoutX="21.0" maxHeight="25.0" maxWidth="106.0" minHeight="25.0" minWidth="58.0" prefHeight="25.0" prefWidth="98.0" text="Foto de Mascota" textFill="#f8f8f6">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <GridPane maxHeight="291.0" maxWidth="136.0" minHeight="284.0" minWidth="100.0" prefHeight="289.0" prefWidth="100.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -108,15 +140,15 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <HBox.margin>
-                  <Insets left="60.0" />
+                  <Insets />
                </HBox.margin>
                <children>
-                  <TextField fx:id="idCrit" maxHeight="30.0" maxWidth="136.0" minHeight="30.0" minWidth="136.0" prefHeight="30.0" prefWidth="136.0">
+                  <TextField fx:id="idCrit" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets top="45.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="calific" maxHeight="30.0" maxWidth="136.0" minHeight="30.0" minWidth="136.0" prefHeight="30.0" prefWidth="136.0" GridPane.rowIndex="1">
+                  <TextField fx:id="calific" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="35.0" />
                      </GridPane.margin>
