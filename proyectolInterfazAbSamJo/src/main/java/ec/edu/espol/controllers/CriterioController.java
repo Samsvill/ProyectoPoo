@@ -5,27 +5,35 @@
  */
 package ec.edu.espol.controllers;
 
+import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Criterio;
 import ec.edu.espol.proyectolinterfazabsamjo.App;
+import ec.edu.espol.utilitario.Util;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+
 /**
  * FXML Controller class
  *
@@ -33,21 +41,25 @@ import javafx.scene.layout.Pane;
  */
 public class CriterioController implements Initializable {
 
-
-    @FXML
-    private AnchorPane AnchorPane;
     @FXML
     private Pane panel;
     @FXML
     private TextField numCrit;
     @FXML
-    private Button btn1;
+    private ScrollPane srcllpane;
+    @FXML
+    private VBox vbox;
     @FXML
     private Button btnMenu;
+    @FXML
+    private Button guardar;
+    @FXML
+    private Button acept;
+
     /**
      * Initializes the controller class.
      */
-    int nums = Integer.parseInt(numCrit.getText());
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Image img = new Image("Imagenes\\mascotas.jpg");
@@ -60,17 +72,9 @@ public class CriterioController implements Initializable {
         Background bGround = new Background(bImg);
         panel.setBackground(bGround);
     }    
-    
-    @FXML
-    private void ingresarCriterios(MouseEvent event) {
-            
-            int nums = Integer.parseInt(numCrit.getText());
-            
-            
-    }
 
     @FXML
-    private void volverMenu(ActionEvent event) {
+    private void irMenu(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Menu.fxml"));
             Parent root;
@@ -81,4 +85,75 @@ public class CriterioController implements Initializable {
         }
     }
 
+    @FXML
+    private void guardar(ActionEvent event) {
+        try{
+        ArrayList<Criterio> criterios = new ArrayList<>(); 
+        int v1 = vbox.getChildren().size();
+        for(int i =0; i<(v1-1);i+=6){
+             TextField f1=(TextField)vbox.getChildren().get(i+1);
+             TextField f2=(TextField)vbox.getChildren().get(i+3);
+             TextField f3=(TextField)vbox.getChildren().get(i+5);
+             Criterio c1 = new Criterio(Util.nextID("criterios.txt"),0,f1.getText(),f2.getText(),Double.parseDouble(f3.getText()));
+             criterios.add(c1);
+         }
+        TextField nomC =(TextField)vbox.getChildren().get(v1-1);
+        String noC = nomC.getText();
+        Concurso c1 = Concurso.obtenerConcursoXNombre(noC);
+        if(c1 == null){
+                    Alert a = new Alert(Alert.AlertType.ERROR,"No existe el Concurso");
+                    a.show();
+                } 
+        int idc1 = c1.getIdConcurso();
+        for(Criterio c:criterios){
+            c.setIdConcurso(idc1);
+            c.saveFile("criterios.txt");
+        }
+        
+        }catch(IndexOutOfBoundsException e){
+            Alert i =  new Alert(AlertType.ERROR, "No ha ingresado los datos ");
+            i.show();
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }catch(NumberFormatException e){
+            Alert i =  new Alert(AlertType.ERROR, "Debe ingresar el puntaje máximo.");
+            i.show();
+        }finally{
+            numCrit.clear();
+            vbox.getChildren().clear();
+        }
+        
+        
+    }
+
+    @FXML
+    private void correrScroll(ActionEvent event) {
+        vbox.getChildren().clear();
+        try
+        {
+        int crites = Integer.parseInt(numCrit.getText());
+        for(int i =0; i<crites;i++){
+            Label lb1 = new Label("Nombre del criterio");
+            TextField nom = new TextField("");
+            Label lb2 = new Label("Descripción del criterio");
+            TextField descr = new TextField(""); 
+            Label lb3 = new Label("Puntaje Máximo del criterio");
+            TextField punt = new TextField(""); // Aqui se agregan la cantidad de textsfields de acuerdo a la cantidad de criterios
+            vbox.getChildren().add(lb1);
+            vbox.getChildren().add(nom);
+            vbox.getChildren().add(lb2);
+            vbox.getChildren().add(descr);
+            vbox.getChildren().add(lb3);
+            vbox.getChildren().add(punt);
+        }
+        Label lb4 = new Label("Nombre del Concurso");
+        TextField nomconcurso = new TextField("");  //Aqui se pide el nombre del concurso al que pertenece el textfield
+        vbox.getChildren().add(lb4);
+        vbox.getChildren().add(nomconcurso);
+        }catch(NumberFormatException e){
+            Alert w = new Alert(AlertType.ERROR, "No ha ingresado correctamente la cantidad de criterios");
+            w.show();
+        }
+    }
+    
 }

@@ -6,8 +6,13 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.utilitario.Util;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -146,9 +151,8 @@ public class Criterio {
     
     
     public void saveFile(String nomFile){ 
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
-            pw.println(Util.nextID(nomFile)+"|"+this.idConcurso+"|"+this.nombre+"|"+this.descripcion+"|"+this.puntajeMax);
-            
+        try(FileWriter fr = new FileWriter(nomFile,true); BufferedWriter bw = new BufferedWriter(fr)){
+            bw.append((Util.nextID(nomFile)+"|"+this.idConcurso+"|"+this.nombre+"|"+this.descripcion+"|"+this.puntajeMax));
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -157,13 +161,15 @@ public class Criterio {
     
     public static ArrayList<Criterio> readFromFile(String nomFile){
         ArrayList<Criterio> criterio = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomFile))){
-            while(sc.hasNextLine()){
-                String linea = sc.nextLine();
-                String[] tokens = linea.split("\\|");
+        try(FileReader fr = new FileReader(nomFile); BufferedReader br = new BufferedReader(fr)){
+            String line;
+            while((line = br.readLine()) != null){
+                String[] tokens = line.split("\\|");
                 Criterio cr = new Criterio(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],Double.parseDouble(tokens[4]));
                 criterio.add(cr);
             }
+        }catch(IOException e){
+            System.out.println(e.getMessage());
         }
         catch(Exception e){
             System.out.println(e.getMessage());

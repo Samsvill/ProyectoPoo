@@ -6,8 +6,12 @@
 package ec.edu.espol.controllers;
 
 import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Criterio;
+import ec.edu.espol.model.DatoNoCompletadoException;
+import ec.edu.espol.model.Evaluacion;
 import ec.edu.espol.model.Inscripcion;
 import ec.edu.espol.model.Mascota;
+import ec.edu.espol.model.MiembroJurado;
 import ec.edu.espol.proyectolinterfazabsamjo.App;
 import ec.edu.espol.utilitario.Util;
 import java.io.IOException;
@@ -72,49 +76,47 @@ public class InscripcionController implements Initializable {
     
     @FXML
     private void hacerLaIncripcion(ActionEvent event) {
-        String fech= fecha.getText();
-        String [] arr_fecha= fech.split("-");
-        if(nomMasc.getText() == ""){
-            Alert a = new Alert(AlertType.ERROR,"No ha ingresado el nombre de la Mascota");
-            a.show();
-//        }else{
-//            String nombreM = nomMasc.getText();
-//            Mascota mc = Mascota.obtenerMascotaXNombre(nombreM);
-//            if(mc == null){
-//                Alert a = new Alert(AlertType.ERROR,"La Mascota cuyo nombre ingreso para su Inscripcion NO EXISTE");
-            }   
-           // int indMc = mc.getIdMascota();
-            //}
-            if(nomConcur.getText() == "" ){
-            Alert a = new Alert(AlertType.ERROR,"No ha ingresado el nombre del Concurso");
-            a.show();
-//            }else{
-//                String nombreC = nomConcur.getText();
-//                Concurso conco = Concurso.obtenerConcursoXNombre(nombreC);
-//                if(conco == null){
-//                    Alert a = new Alert(AlertType.ERROR,"El concurso cuyo nombre ingreso para la Inscripcion NO EXISTE");  
-//                    }
-//                int idCo = conco.getIdConcurso();
+        try
+        {
+        
+            String fech= fecha.getText();
+            String [] arr_fecha= fech.split("-");
+            Mascota m = Mascota.obtenerMascotaXNombre(nomMasc.getText());
+            if(m == null){
+                    Alert a = new Alert(AlertType.ERROR,"No existe el nombre de la Mascota");
+                    a.show();
+                } 
+            Concurso c  = Concurso.obtenerConcursoXNombre(nomConcur.getText());
+            if(c == null){
+                    Alert a = new Alert(AlertType.ERROR,"No existe el Concurso ingresado");
+                    a.show();
                 }
-        if(valorcan.getText() == ""){
-            Alert a = new Alert(AlertType.ERROR,"No ha ingresado el valor a cancelar");
-            a.show();
-//            }else{
-//                Double valor = Double.parseDouble(valorcan.getText());
-             }
-        if(fecha.getText() == ""){
-            Alert a = new Alert(AlertType.ERROR,"No ha ingresado la fecha");
-            a.show();
-        }
-        if(arr_fecha.length !=3){
+            if(arr_fecha.length !=3){
                     Alert a = new Alert(AlertType.ERROR,"No ha ingresado la fecha correctamente");
-                }
-                LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
-                fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
-
-//                Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),indMc,idCo,fecha1,costo);
-
-                
+                    a.show();
+                    }
+            LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
+            fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            int indMc = m.getIdMascota();
+            int idCo = c.getIdConcurso();
+            Double costo = Double.parseDouble(valorcan.getText());
+            Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),indMc,idCo,fecha1,costo);
+            new_inscrip.saveFile("inscripciones.txt");
+            }catch(NullPointerException npE){
+                System.out.println(npE.getMessage());
+            }catch(NumberFormatException nfE){
+                Alert a = new Alert(AlertType.ERROR, "No ingresó la mascota, el concurso ó la calificación;\nó Ingresó  la fecha incorrectamente \nó Ingresó texto en alguno de estos 3. \n"
+                        + "Ingrese de nuevo");
+                a.show();
+            } catch(ArrayIndexOutOfBoundsException e){
+                System.out.println(e.getMessage());
+            }
+        nomMasc.setText("");
+        nomConcur.setText("");
+        valorcan.setText("");
+        fecha.setText("");
+//        
+//                
     }
 
     @FXML

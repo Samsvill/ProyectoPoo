@@ -22,9 +22,7 @@ public class App extends Application {
         scene = new Scene(root, 600, 430);
         stage.setScene(scene);
         stage.show();
-//        scene = new Scene(loadFXML("miembrojuradografo").load(), 640, 480);
-//        stage.setScene(scene);
-//        stage.show();
+
     }
 
 

@@ -73,6 +73,13 @@ public class MenuController implements Initializable {
 
     @FXML
     private void llamarMascot(ActionEvent event) {
+        try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("mascotaGrafo.fxml"));
+                    Parent root = fxmlLoader.load();
+                    App.scene.setRoot(root);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
     }
 
     @FXML
@@ -87,7 +94,8 @@ public class MenuController implements Initializable {
     private void llamrCriterio(ActionEvent event) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Criterio.fxml"));
-                    Parent root = fxmlLoader.load();
+                    Parent root;
+                    root = fxmlLoader.load();
                     App.scene.setRoot(root);
                     } catch (IOException ex) {
                         ex.printStackTrace();

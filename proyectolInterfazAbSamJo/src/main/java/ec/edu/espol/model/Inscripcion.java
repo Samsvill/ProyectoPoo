@@ -5,8 +5,10 @@
  */
 package ec.edu.espol.model;
 import ec.edu.espol.utilitario.Util;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -174,18 +176,17 @@ public class Inscripcion {
     }
        public static ArrayList<Inscripcion> readFromFile(String nomfile){
         ArrayList<Inscripcion> inscripciones = new ArrayList<>();
-        try(Scanner sc= new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
+        try(FileReader fr = new FileReader(nomfile); BufferedReader br = new BufferedReader(fr)){
+            String line;
+            while((line = br.readLine()) != null)
             {
-                String linea=sc.nextLine();
-                String [] tokens= linea.split("\\|");
+                String [] tokens= line.split("\\|");
                 Inscripcion insc = new Inscripcion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), LocalDate.parse(tokens[3]), Double.parseDouble(tokens[4]));
                 inscripciones.add(insc);
             }
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-  
         }
         return inscripciones;
        }
