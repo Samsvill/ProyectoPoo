@@ -161,4 +161,13 @@ public class Dueño extends Persona{
         return null;
     }    
 
+    //-------------------------------------------------------------------------------------------
+    public static Dueño obtenerDueñoXEmail(String email){
+        ArrayList<Dueño> dueños = Dueño.readFromFile("dueños.txt");
+        for(Dueño dF : dueños){
+            if(Objects.equals(dF.email,email))
+                 return dF;   
+        }
+        return null;
+    }
 }

@@ -15,10 +15,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 /**
  *
- * @author 
+ * @author
  */
 public class Mascota {
 
@@ -30,26 +29,26 @@ public class Mascota {
     private int idDueño;
     private Dueño dueño;
     private ArrayList<Inscripcion> inscripciones;
-    
-     public Mascota(int idMascota,int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento) {
+
+    public Mascota(int idMascota, int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento) {
         this.idMascota = idMascota;
         this.idDueño = idDueño;
         this.nombre = nombre;
+        this.tipo = tipo;
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
-        this.tipo = tipo;
         this.inscripciones = new ArrayList<>();
     }
 
-    public Mascota(int idMascota, String nombre, String tipo, String raza, LocalDate fechaNacimiento, int idDueño, Dueño dueño, ArrayList<Inscripcion> inscripciones) {
+    public Mascota(int idMascota, int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento, Dueño dueño, ArrayList<Inscripcion> inscripciones) {
         this.idMascota = idMascota;
+        this.idDueño = idDueño;
         this.nombre = nombre;
+        this.tipo = tipo;
         this.raza = raza;
         this.fechaNacimiento = fechaNacimiento;
-        this.tipo = tipo;
-        this.idDueño = idDueño;
         this.dueño = dueño;
-        this.inscripciones = new ArrayList<> ();
+        this.inscripciones = new ArrayList<>();
     }
 
     public int getIdMascota() {
@@ -116,7 +115,6 @@ public class Mascota {
         this.inscripciones = inscripciones;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -132,45 +130,43 @@ public class Mascota {
         return (this.idMascota == msc.idMascota && this.idDueño == msc.idDueño && Objects.equals(this.nombre, msc.nombre));
     }
 
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre+"\n Tipo de animal: " + this.tipo +"/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento+ "Pertenece a /n"+ "Id de Dueño: "+this.dueño.getId()+"/n Nombre: "+this.dueño.getNombre()+", Apellidos: "+ this.dueño.getApellidos());
-        for(Inscripcion inscripcion : this.inscripciones)
-            sb.append("\n Costo de la inscripcion: "+inscripcion.getCostoInscripcion()+"/n Fecha de inscripción: "+inscripcion.getFechaInscripcion()+".\n");
+        sb.append("Macota No. " + this.idMascota + "\n Nombre de la mascota: " + this.nombre + "\n Tipo de animal: " + this.tipo + "/n Raza de la mascota: " + this.raza + "/n Fecha de nacimiento: " + this.fechaNacimiento + "Pertenece a /n" + "Id de Dueño: " + this.dueño.getId() + "/n Nombre: " + this.dueño.getNombre() + ", Apellidos: " + this.dueño.getApellidos());
+        for (Inscripcion inscripcion : this.inscripciones) {
+            sb.append("\n Costo de la inscripcion: " + inscripcion.getCostoInscripcion() + "/n Fecha de inscripción: " + inscripcion.getFechaInscripcion() + ".\n");
+        }
         return sb.toString();
     }
-    
-    public void saveFile(String nomFile){ 
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
-            pw.println(Util.nextID(nomFile)+"|"+this.idDueño+"|"+this.nombre+"|"+this.tipo+"|"+this.raza+"|"+this.fechaNacimiento);
-            
-        }
-        catch(Exception e){
+
+    public void saveFile(String nomFile) {
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))) {
+            pw.println(Util.nextID(nomFile) + "|" + this.idDueño + "|" + this.nombre + "|" + this.tipo + "|" + this.raza + "|" + this.fechaNacimiento);
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public static ArrayList<Mascota> readFromFile(String nomFile){
+
+    public static ArrayList<Mascota> readFromFile(String nomFile) {
         ArrayList<Mascota> mascota = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomFile))){
-            while(sc.hasNextLine()){
+        try (Scanner sc = new Scanner(new File(nomFile))) {
+            while (sc.hasNextLine()) {
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
                 /*int idMascota,int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento*/
-                Mascota mas = new Mascota(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2],tokens[3],tokens[4],LocalDate.parse(tokens[5]));
+                Mascota mas = new Mascota(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4], LocalDate.parse(tokens[5]));
                 mascota.add(mas);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return mascota;
     }
-    
-    public static Mascota nextMascota(Scanner sc){
+
+    public static Mascota nextMascota(Scanner sc) {
         sc.useDelimiter("\n");
         int idm = Util.nextID("mascotas.txt");
         int idD = 0;
@@ -182,19 +178,20 @@ public class Mascota {
         System.out.println("Ingrese la raza de su mascota: ");
         String raz = sc.next().toLowerCase();
         System.out.println("Ingrese la fecha de nacimiento de su mascota en este orden año-mes-día: ");
-        LocalDate fn = LocalDate.parse(sc.next()); 
-        Mascota mas1 = new Mascota(idm,idD, name, tip, raz, fn);
+        LocalDate fn = LocalDate.parse(sc.next());
+        Mascota mas1 = new Mascota(idm, idD, name, tip, raz, fn);
         return mas1;
     }
-    
+
     //Metodo para buscar el nombre de Mascota y Obtenerla
-        public static Mascota obtenerMascotaXNombre(String nombre){
+    public static Mascota obtenerMascotaXNombre(String nombre) {
         ArrayList<Mascota> mascotas = Mascota.readFromFile("mascotas.txt");
-        for(Mascota msc : mascotas){
-            if(Objects.equals(msc.nombre, nombre))
-                 return msc;   
+        for (Mascota msc : mascotas) {
+            if (Objects.equals(msc.nombre, nombre)) {
+                return msc;
+            }
         }
         return null;
-    }    
-        
+    }
+
 }

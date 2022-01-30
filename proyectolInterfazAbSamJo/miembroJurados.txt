@@ -1,4 +1,4 @@
 1|Abraham|Davila|2939192|aodavila@espol.edu.ec|estudiante
 2|Matias|Espinoza|2043945|matesp@espol.edu.ec|investigador
 3|q|p|0293023|qp@hotmail.com|trabajador
-4|manuel|cañizares|2049204|manuelca@gmail.com|artista
+4|manuel|caï¿½izares|2049204|manuelca@gmail.com|artista
