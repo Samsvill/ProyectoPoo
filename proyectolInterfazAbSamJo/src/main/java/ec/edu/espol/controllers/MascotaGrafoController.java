@@ -89,9 +89,11 @@ public class MascotaGrafoController implements Initializable {
         } catch(DatoNoCompletadoException e){
             Alert a = new Alert(AlertType.ERROR,"Uno de sus campos no está lleno, revise e inténtelo de nuevo.");
             a.show();
-        } catch(NullPointerException e){
-            e.getMessage();
-        }
+        } /*catch(NullPointerException e){
+            //e.getMessage();
+            Alert a = new Alert(AlertType.ERROR,"NullPointerException");
+            a.show();
+        }*/
         
         email.setText("");
         nombreMascota.setText("");
