@@ -5,6 +5,10 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.model.Criterio;
+import ec.edu.espol.model.DatoNoCompletadoException;
+import ec.edu.espol.model.Inscripcion;
+import ec.edu.espol.model.Premio;
 import ec.edu.espol.utilitario.Util;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +40,7 @@ public class Concurso {
         fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
     */
     
-    public Concurso(int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica) {
+    public Concurso(int idConcurso, String nombre, LocalDate fecha, LocalDate fechaInscripcion, LocalDate fechaCierreInscripcion, String tematica) throws DatoNoCompletadoException {
         this.idConcurso = idConcurso;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -200,24 +204,28 @@ public class Concurso {
     }
     
     public static Concurso nextConcurso(Scanner sc){
-        sc.useDelimiter("\n");
-        int idc = Util.nextID("concursos.txt");
-        System.out.println("Ingrese el nombre del concurso: ");
-        String name = sc.next();
-        String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
-        System.out.println("Ingrese la fecha del concurso: ");
-        String fechaText = sc.next();
-        LocalDate f = LocalDate.parse(fechaText);
-        System.out.println("Ingrese la fecha de incripción del concurso en este orden año-mes-día: ");
-        String fechaTextoIns = sc.next();
-        LocalDate fi = LocalDate.parse(fechaTextoIns);
-        System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
-        String fechaTextCierre = sc.next();
-        LocalDate fc = LocalDate.parse(fechaTextCierre);
-        System.out.println("Ingrese la temática del concurso: ");
-        String tm = sc.next().toLowerCase();
-        Concurso con = new Concurso(idc, nombre,f, fi, fc,tm);
-        return con;
+        try {
+            sc.useDelimiter("\n");
+            int idc = Util.nextID("concursos.txt");
+            System.out.println("Ingrese el nombre del concurso: ");
+            String name = sc.next();
+            String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
+            System.out.println("Ingrese la fecha del concurso: ");
+            String fechaText = sc.next();
+            LocalDate f = LocalDate.parse(fechaText);
+            System.out.println("Ingrese la fecha de incripción del concurso en este orden año-mes-día: ");
+            String fechaTextoIns = sc.next();
+            LocalDate fi = LocalDate.parse(fechaTextoIns);
+            System.out.println("Ingrese la fecha de cierre de incripción del consurso: ");
+            String fechaTextCierre = sc.next();
+            LocalDate fc = LocalDate.parse(fechaTextCierre);
+            System.out.println("Ingrese la temática del concurso: ");
+            String tm = sc.next().toLowerCase();
+            Concurso con = new Concurso(idc, nombre,f, fi, fc,tm);
+            return con;
+        } catch (DatoNoCompletadoException ex) {
+        }
+        return null;
     }
 
     public static Concurso obtenerConcursoXNombre(String nombre){

@@ -5,6 +5,9 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.model.DatoNoCompletadoException;
+import ec.edu.espol.model.Dueño;
+import ec.edu.espol.model.Inscripcion;
 import ec.edu.espol.utilitario.Util;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +33,7 @@ public class Mascota {
     private Dueño dueño;
     private ArrayList<Inscripcion> inscripciones;
 
-    public Mascota(int idMascota, int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento) {
+    public Mascota(int idMascota, int idDueño, String nombre, String tipo, String raza, LocalDate fechaNacimiento) throws DatoNoCompletadoException {
         this.idMascota = idMascota;
         this.idDueño = idDueño;
         this.nombre = nombre;
@@ -167,20 +170,25 @@ public class Mascota {
     }
 
     public static Mascota nextMascota(Scanner sc) {
-        sc.useDelimiter("\n");
-        int idm = Util.nextID("mascotas.txt");
-        int idD = 0;
-        System.out.println("Ingrese el nombre de la mascota: ");
-        String name = sc.next().toLowerCase();
-        String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
-        System.out.println("Ingrese el tipo de mascota: ");
-        String tip = sc.next().toLowerCase();
-        System.out.println("Ingrese la raza de su mascota: ");
-        String raz = sc.next().toLowerCase();
-        System.out.println("Ingrese la fecha de nacimiento de su mascota en este orden año-mes-día: ");
-        LocalDate fn = LocalDate.parse(sc.next());
-        Mascota mas1 = new Mascota(idm, idD, name, tip, raz, fn);
-        return mas1;
+        try {
+            sc.useDelimiter("\n");
+            int idm = Util.nextID("mascotas.txt");
+            int idD = 0;
+            System.out.println("Ingrese el nombre de la mascota: ");
+            String name = sc.next().toLowerCase();
+            String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
+            System.out.println("Ingrese el tipo de mascota: ");
+            String tip = sc.next().toLowerCase();
+            System.out.println("Ingrese la raza de su mascota: ");
+            String raz = sc.next().toLowerCase();
+            System.out.println("Ingrese la fecha de nacimiento de su mascota en este orden año-mes-día: ");
+            LocalDate fn = LocalDate.parse(sc.next());
+            Mascota mas1 = new Mascota(idm, idD, name, tip, raz, fn);
+            return mas1;
+        } catch (DatoNoCompletadoException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     //Metodo para buscar el nombre de Mascota y Obtenerla
