@@ -40,7 +40,6 @@ public class MascotaGrafoController implements Initializable {
     private TextField birthday;
     @FXML
     private TextField pathimage;
-    @FXML
     private TextField tipo;
 
     /**
@@ -51,6 +50,7 @@ public class MascotaGrafoController implements Initializable {
         // TODO
     }
 
+    @FXML
     private void guardarMascota(MouseEvent event) {
         try {
             String name = nombreMascota.getText();

@@ -64,7 +64,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="Re" mnemonicParsing="false" text="Regresar al Menú" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" text="Guardar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onMouseClicked="#guardarMascota" text="Guardar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </bottom>
