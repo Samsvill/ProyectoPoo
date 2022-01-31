@@ -34,7 +34,7 @@ public class Criterio {
     private Concurso concursos;
     
     
-     public Criterio(int idCriterio,int idConcurso, String nombre, String descripcion, double puntajeMax) {
+     public Criterio(int idCriterio,int idConcurso, String nombre, String descripcion, double puntajeMax) throws NumMenorQue0Exception{
         this.idCriterio = idCriterio;
         this.idConcurso = idConcurso;
         this.nombre = nombre;
@@ -42,7 +42,7 @@ public class Criterio {
         if(puntajeMax>=0)
             this.puntajeMax = puntajeMax;
         else 
-            this.puntajeMax = -(puntajeMax);
+            throw new NumMenorQue0Exception("Su Puntaje Máximo es MENOR QUE 0.");
         this.evaluaciones = new ArrayList<>();
     }
     
@@ -179,20 +179,27 @@ public class Criterio {
     }
     
     public static Criterio nextCriterio(Scanner sc){
-        sc.useDelimiter("\n");
-        int idcr = Util.nextID("criterios.txt");
-        int idc = 0;
-        System.out.println("Ingrese el nombre del criterio: ");
-        String name = sc.next();
-        String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
-        System.out.println("Ingrese la descripción del criterio: ");
-        String dp = sc.next().toLowerCase();
-        System.out.println("Ingrese el puntaje máximo, en números: ");
-        Double pm = sc.nextDouble();
-        Criterio cr1 = new Criterio(idcr,idc, nombre, dp, pm);
-        return cr1;
+        Criterio cr1 = null;
+        try {
+            sc.useDelimiter("\n");
+            int idcr = Util.nextID("criterios.txt");
+            int idc = 0;
+            System.out.println("Ingrese el nombre del criterio: ");
+            String name = sc.next();
+            String nombre = name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
+            System.out.println("Ingrese la descripción del criterio: ");
+            String dp = sc.next().toLowerCase();
+            System.out.println("Ingrese el puntaje máximo, en números: ");
+            Double pm = sc.nextDouble();
+            cr1 = new Criterio(idcr,idc, nombre, dp, pm);
+            return cr1;
+        } catch (NumMenorQue0Exception ex) {
+            System.out.println(ex.getMessage());;
+        }
+        return null;
     }
-        public static Criterio obtenerCriterioXNombre(String nombre){
+    
+    public static Criterio obtenerCriterioXNombre(String nombre){
         ArrayList<Criterio> criterios = Criterio.readFromFile("criterios.txt");
         for(Criterio msc : criterios){
             if(Objects.equals(msc.nombre, nombre))

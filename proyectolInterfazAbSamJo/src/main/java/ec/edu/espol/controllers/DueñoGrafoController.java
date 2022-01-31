@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -91,7 +93,9 @@ public class DueñoGrafoController implements Initializable {
             Dueño dueño = new Dueño(Util.nextID("dueños.txt"), nombreD, apellD, tlfD, emlD, dirD);
             dueño.saveFile("dueños.txt");
         } catch (DatoNoCompletadoException ex) {
-            ex.printStackTrace();
+            Alert a = new Alert(AlertType.ERROR, "NO HA INGRESADO el nombre del Dueño, ó el/los apellidos del Dueño, ó\n"
+                    + "el teléfono del Dueño, ó el email del Dueño, ó su dirección.");
+            a.show();
         }
         nameDueño.setText("");
         apDueño.setText("");

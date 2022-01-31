@@ -7,7 +7,6 @@ package ec.edu.espol.controllers;
 
 import ec.edu.espol.model.Concurso;
 import ec.edu.espol.model.DatoNoCompletadoException;
-import ec.edu.espol.model.Dueño;
 import ec.edu.espol.utilitario.Util;
 import java.net.URL;
 import java.time.LocalDate;

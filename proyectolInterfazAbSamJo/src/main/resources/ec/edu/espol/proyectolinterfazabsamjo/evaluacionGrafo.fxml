@@ -14,9 +14,9 @@
 
 <BorderPane fx:id="bpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.EvaluacionGrafoController">
    <top>
-      <Label maxHeight="97.0" maxWidth="100.0" minHeight="23.0" minWidth="56.0" prefHeight="23.0" prefWidth="100.0" text="Evaluación" textFill="#f7f7f7" BorderPane.alignment="CENTER">
+      <Label maxHeight="97.0" maxWidth="153.0" minHeight="23.0" minWidth="56.0" prefHeight="33.0" prefWidth="153.0" text="Evaluación" textFill="#f7f7f7" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Times New Roman Bold" size="20.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
          <BorderPane.margin>
             <Insets top="15.0" />
@@ -36,15 +36,15 @@
             <Insets left="10.0" />
          </padding>
          <children>
-            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el email del miembro de Jurado:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true">
+            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el email del miembro de Jurado:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.halignment="LEFT">
                <font>
-                  <Font name="System Bold" size="13.5" />
+                  <Font name="Times New Roman Bold" size="13.5" />
                </font>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el id de la Inscripción de la Mascota:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.rowIndex="1">
+            <Label maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="119.0" prefHeight="60.0" prefWidth="119.0" text="Ingrese el id de la Inscripción de la Mascota:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="13.5" />
                </font>
@@ -65,7 +65,7 @@
             <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label maxHeight="93.0" maxWidth="131.0" minHeight="60.0" minWidth="119.0" prefHeight="76.0" prefWidth="131.0" text="Ingrese el id del Criterio para evaluar a la Mascota:" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true">
+            <Label maxHeight="93.0" maxWidth="131.0" minHeight="60.0" minWidth="119.0" prefHeight="76.0" prefWidth="131.0" text=": Ingrese el id del Criterio para evaluar a la Mascota" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.halignment="RIGHT">
                <font>
                   <Font name="System Bold" size="13.5" />
                </font>
@@ -73,7 +73,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <Label maxHeight="92.0" maxWidth="128.0" minHeight="60.0" minWidth="119.0" prefHeight="88.0" prefWidth="128.0" text=": Ingrese la calificación cuantitativa de la Evaluación" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.rowIndex="1">
+            <Label maxHeight="92.0" maxWidth="128.0" minHeight="60.0" minWidth="119.0" prefHeight="88.0" prefWidth="128.0" text=": Ingrese la calificación cuantitativa de la Evaluación" textAlignment="CENTER" textFill="#f8f8f6" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="13.5" />
                </font>

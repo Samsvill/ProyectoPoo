@@ -12,6 +12,7 @@ import ec.edu.espol.model.Evaluacion;
 import ec.edu.espol.model.Inscripcion;
 import ec.edu.espol.model.Mascota;
 import ec.edu.espol.model.MiembroJurado;
+import ec.edu.espol.model.NumMenorQue0Exception;
 import ec.edu.espol.proyectolinterfazabsamjo.App;
 import ec.edu.espol.utilitario.Util;
 import java.io.IOException;
@@ -28,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -58,6 +60,8 @@ public class InscripcionController implements Initializable {
     private TextField fecha;
     @FXML
     private Pane panel;
+    @FXML
+    private Label idINS;
     /**
      * Initializes the controller class.
      */
@@ -102,19 +106,26 @@ public class InscripcionController implements Initializable {
             Double costo = Double.parseDouble(valorcan.getText());
             Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),indMc,idCo,fecha1,costo);
             new_inscrip.saveFile("inscripciones.txt");
+            idINS.setText(String.valueOf(new_inscrip.getIdInscripcion()));
             }catch(NullPointerException npE){
                 System.out.println(npE.getMessage());
             }catch(NumberFormatException nfE){
-                Alert a = new Alert(AlertType.ERROR, "No ingresó la mascota, el concurso ó la calificación;\nó Ingresó  la fecha incorrectamente \nó Ingresó texto en alguno de estos 3. \n"
+                Alert a = new Alert(AlertType.ERROR, "No Ingresó el valor a pagar,\nó Ingresó texto en este campo\n;ó Ingresó  la fecha incorrectamente\n"
                         + "Ingrese de nuevo");
                 a.show();
             } catch(ArrayIndexOutOfBoundsException e){
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
+                Alert a = new Alert(AlertType.ERROR, "Ingresó la fecha incorrectamente.");
+                a.show();
+            }catch(NumMenorQue0Exception nmq0e){
+                Alert a = new Alert(AlertType.ERROR, nmq0e.getMessage());
             }
+        
         nomMasc.setText("");
         nomConcur.setText("");
         valorcan.setText("");
         fecha.setText("");
+        
 //        
 //                
     }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.InscripcionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.InscripcionController">
    <children>
       <Pane fx:id="panel" layoutX="2.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -27,12 +27,22 @@
                <font>
                   <Font name="Times New Roman Bold" size="22.0" />
                </font></Label>
-            <Button fx:id="aceptar" layoutX="399.0" layoutY="316.0" mnemonicParsing="false" onAction="#hacerLaIncripcion" text="Aceptar" />
-            <Button fx:id="btnMenu" layoutX="158.0" layoutY="316.0" mnemonicParsing="false" onAction="#irAlmenu" text="Menú" />
+            <Button fx:id="aceptar" layoutX="398.0" layoutY="316.0" mnemonicParsing="false" onAction="#hacerLaIncripcion" text="Aceptar" />
+            <Button fx:id="btnMenu" layoutX="277.0" layoutY="316.0" mnemonicParsing="false" onAction="#irAlmenu" text="Menú" />
             <TextField fx:id="nomMasc" layoutX="341.0" layoutY="53.0" />
             <TextField fx:id="nomConcur" layoutX="341.0" layoutY="116.0" />
             <TextField fx:id="valorcan" layoutX="341.0" layoutY="181.0" />
             <TextField fx:id="fecha" layoutX="341.0" layoutY="236.0" />
+            <Label fx:id="idINS" layoutX="47.0" layoutY="316.0" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="289.0" text="El id de su Inscripción es:" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

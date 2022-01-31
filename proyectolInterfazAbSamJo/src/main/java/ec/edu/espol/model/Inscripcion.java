@@ -48,7 +48,7 @@ public class Inscripcion {
         this.evaluaciones = new ArrayList<>();
     }
 
-    public Inscripcion(int idInscripcion, int idMascota, int idConcurso, LocalDate fechaInscripcion, double costoInscripcion) {
+    public Inscripcion(int idInscripcion, int idMascota, int idConcurso, LocalDate fechaInscripcion, double costoInscripcion) throws NumMenorQue0Exception{
         this.idInscripcion = idInscripcion;
         this.idMascota = idMascota;
         this.idConcurso = idConcurso;
@@ -56,7 +56,7 @@ public class Inscripcion {
         if(costoInscripcion>=0)
             this.costoInscripcion = costoInscripcion;
         else
-            this.costoInscripcion = -costoInscripcion;
+            throw new NumMenorQue0Exception("Su costo de inscripción es menor que 0.");
         this.evaluaciones = new ArrayList<>();
     }
     
@@ -147,9 +147,9 @@ public class Inscripcion {
     public void setDescuento(double descuento) {
         if(this.costoInscripcion>25)
         this.descuento = this.costoInscripcion-this.costoInscripcion*0.1;
-        else{
+        if(this.costoInscripcion >= 0 && this.costoInscripcion <= 25)
             this.descuento=0;
-        }
+        
     }
     
     //Falta el toString
@@ -193,35 +193,40 @@ public class Inscripcion {
     
     
     public static Inscripcion nextInscripcion(Scanner sc){
-        sc.useDelimiter("\n");
-        System.out.println("Ingrese el nombre de su Mascota: ");
-        String nomMsc = sc.next();
-        Mascota mc = Mascota.obtenerMascotaXNombre(nomMsc);
-        if(mc == null){
-            System.out.println("La Mascota cuyo nombre ingreso para su Inscripcion NO EXISTE ");
-            System.out.println("Ingrese los datos de la Mascota para su Inscripcion");
-            mc = Mascota.nextMascota(sc); 
-            mc.saveFile("mascotas.txt");
+        try {
+            sc.useDelimiter("\n");
+            System.out.println("Ingrese el nombre de su Mascota: ");
+            String nomMsc = sc.next();
+            Mascota mc = Mascota.obtenerMascotaXNombre(nomMsc);
+            if(mc == null){
+                System.out.println("La Mascota cuyo nombre ingreso para su Inscripcion NO EXISTE ");
+                System.out.println("Ingrese los datos de la Mascota para su Inscripcion");
+                mc = Mascota.nextMascota(sc);
+                mc.saveFile("mascotas.txt");
+            }
+            int indMc = mc.getIdMascota();
+            Concurso conco = Concurso.obtenerConcursoXNombre(sc);
+            if(conco == null){
+                System.out.println("El Concurso cuyo nombre ingreso, NO EXISTE");
+                System.out.println("Ingrese los datos del concurso en el que esta su inscripcion");
+                conco =  Concurso.nextConcurso(sc);
+                conco.saveFile("concursos.txt");
+            }
+            int idCo = conco.getIdConcurso();
+            System.out.println("Ingrese el costo de inscripcion: ");
+            double costo = sc.nextDouble();
+            System.out.println("Ingrese la fecha de inscripcion en el formato: año-mes-dia");
+            sc.useDelimiter(",");
+            String fecha= sc.next();
+            String [] arr_fecha= fecha.split("-");
+            LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
+            fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),indMc,idCo,fecha1,costo);
+            return new_inscrip;
+        } catch (NumMenorQue0Exception ex) {
+            System.out.println(ex.getMessage());;
         }
-        int indMc = mc.getIdMascota();
-        Concurso conco = Concurso.obtenerConcursoXNombre(sc);
-        if(conco == null){
-            System.out.println("El Concurso cuyo nombre ingreso, NO EXISTE");
-            System.out.println("Ingrese los datos del concurso en el que esta su inscripcion");
-            conco =  Concurso.nextConcurso(sc);
-            conco.saveFile("concursos.txt");
-        }
-        int idCo = conco.getIdConcurso();
-        System.out.println("Ingrese el costo de inscripcion: ");
-        double costo = sc.nextDouble();  
-        System.out.println("Ingrese la fecha de inscripcion en el formato: año-mes-dia");
-        sc.useDelimiter(",");
-        String fecha= sc.next();
-        String [] arr_fecha= fecha.split("-");
-        LocalDate fecha1 = LocalDate.of(Integer.parseInt(arr_fecha[0]), Integer.parseInt(arr_fecha[1]),Integer.parseInt(arr_fecha[2]));
-        fecha1.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        Inscripcion new_inscrip = new Inscripcion(Util.nextID("inscripciones.txt"),indMc,idCo,fecha1,costo);
-        return new_inscrip;
+        return null;
     }
     
     
