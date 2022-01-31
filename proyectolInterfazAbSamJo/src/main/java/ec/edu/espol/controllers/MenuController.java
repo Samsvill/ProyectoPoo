@@ -84,10 +84,24 @@ public class MenuController implements Initializable {
 
     @FXML
     private void llamarConcur(ActionEvent event) {
+        try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("concursoGrafo.fxml"));
+                    Parent root = fxmlLoader.load();
+                    App.scene.setRoot(root);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
     }
 
     @FXML
     private void llamrpremio(ActionEvent event) {
+//        try {
+//                    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("PONERPERMIOGRAFO.fxml"));     <-- PONER EL NOMBRE DEL GRAFO
+//                    Parent root = fxmlLoader.load();
+//                    App.scene.setRoot(root);
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
     }
 
     @FXML

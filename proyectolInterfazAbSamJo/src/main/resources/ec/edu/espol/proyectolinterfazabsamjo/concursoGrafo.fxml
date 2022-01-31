@@ -8,10 +8,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="400.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.ConcursoGrafoController">
+<BorderPane fx:id="panel" maxHeight="400.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.ConcursoGrafoController">
    <top>
-      <Label prefHeight="48.0" prefWidth="50.0" text="Concurso" BorderPane.alignment="CENTER" />
+      <Label prefHeight="48.0" prefWidth="98.0" text="Concurso" textFill="#fffefe" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="22.0" />
+         </font></Label>
    </top>
    <left>
       <GridPane prefHeight="381.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -23,8 +27,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="170.0" prefWidth="97.0" text="Nombre del concurso:" textAlignment="RIGHT" wrapText="true" />
-            <Label alignment="CENTER_RIGHT" prefHeight="170.0" prefWidth="100.0" text="Fecha del concurso:" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" prefHeight="170.0" prefWidth="97.0" text="Nombre del concurso:" textAlignment="RIGHT" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="170.0" prefWidth="100.0" text="Fecha del concurso:" textAlignment="RIGHT" textFill="#f8f7f7" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
          </children>
       </GridPane>
    </left>
@@ -81,9 +91,18 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Fecha de inicio de inscripciones" wrapText="true" />
-            <Label prefWidth="123.0" text="Fecha de cierre de inscripciones" wrapText="true" GridPane.rowIndex="1" />
-            <Label text="Temática del concurso" wrapText="true" GridPane.rowIndex="2" />
+            <Label text="Fecha de inicio de inscripciones" textFill="#f5f5f5" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
+            <Label prefWidth="123.0" text="Fecha de cierre de inscripciones" textFill="#fcfcfc" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
+            <Label text="Temática del concurso" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
          </children>
       </GridPane>
    </right>
@@ -97,7 +116,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Volver al menú" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#irAlMen" text="Volver al menú" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onMouseClicked="#guardarConcurso" text="Guardar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>

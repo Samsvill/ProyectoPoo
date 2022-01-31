@@ -9,13 +9,17 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.MascotaGrafoController">
+<BorderPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.MascotaGrafoController">
    <top>
-      <Label text="Registro Mascota" BorderPane.alignment="CENTER">
+      <Label text="Registro Mascota" textFill="#fcfcfc" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="15.0" />
-         </BorderPane.margin></Label>
+         </BorderPane.margin>
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font></Label>
    </top>
    <left>
       <GridPane alignment="CENTER_RIGHT" maxHeight="290.0" prefHeight="290.0" prefWidth="111.0" BorderPane.alignment="CENTER">
@@ -27,12 +31,18 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="143.0" prefWidth="116.0" text="E-mail del dueño:" textAlignment="RIGHT" wrapText="true">
+            <Label alignment="CENTER_RIGHT" prefHeight="143.0" prefWidth="116.0" text="E-mail del dueño:" textAlignment="RIGHT" textFill="#fffbfb" wrapText="true">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="141.0" prefWidth="113.0" text="Nombre de la mascota:" textAlignment="RIGHT" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" prefHeight="141.0" prefWidth="113.0" text="Nombre de la mascota:" textAlignment="RIGHT" textFill="#fcfcfc" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
          </children>
       </GridPane>
    </left>
@@ -47,9 +57,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="113.0" prefWidth="100.0" text="Tipo de raza" wrapText="true" GridPane.valignment="CENTER" />
-            <Label prefHeight="106.0" prefWidth="119.0" text="Fecha de nacimiento" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label prefHeight="106.0" prefWidth="119.0" text="Imagen..." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label prefHeight="113.0" prefWidth="100.0" text="Tipo de raza" textFill="WHITE" wrapText="true" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
+            <Label prefHeight="106.0" prefWidth="119.0" text="Fecha de nacimiento" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
+            <Label prefHeight="106.0" prefWidth="119.0" text="Imagen..." textFill="#f8f5f5" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font></Label>
          </children>
       </GridPane>
    </right>
@@ -63,7 +82,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="Re" mnemonicParsing="false" text="Regresar al Menú" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="Re" mnemonicParsing="false" onAction="#irAlMenu" text="Regresar al Menú" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onMouseClicked="#guardarMascota" text="Guardar Mascota" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
